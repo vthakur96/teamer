@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -10,7 +9,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/dashboard', 'UserController@index');
 Route::get('/login', 'Auth\AuthController@index');
+Route::post('/login', 'Auth\AuthController@loginUser');
 
 Route::get('/register', 'Auth\AuthController@createAccount');
 Route::post('/register', 'Auth\AuthController@createUser');
@@ -26,5 +27,5 @@ Route::post('/register', 'Auth\AuthController@createUser');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/dashboard', 'UserController@index');
 });

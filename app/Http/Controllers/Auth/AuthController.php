@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -24,10 +25,10 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-protected function index(){
-      return view('index');
+      protected function index(){
+            return view('index');
 
-}
+      }
     /**
      * Where to redirect users after login / registration.
      *
@@ -88,10 +89,10 @@ protected function index(){
     return redirect('/login');
   }
   protected function loginUser(Request $request){
-
-    
-
-
+      $email = $request['email'];
+      $password = $request['password'];
+      if(\Auth::attempt(['email'=> $email, 'password'=> $password]))
+      return redirect('/dashboard');
   }
 
 }
