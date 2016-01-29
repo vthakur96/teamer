@@ -10,11 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/login', 'Auth\AuthController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/register', 'Auth\AuthController@createAccount');
+Route::post('/register', 'Auth\AuthController@createUser');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

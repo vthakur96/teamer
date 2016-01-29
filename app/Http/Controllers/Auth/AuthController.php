@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Hash;
 use App\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -23,6 +24,10 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+protected function index(){
+      return view('index');
+
+}
     /**
      * Where to redirect users after login / registration.
      *
@@ -69,4 +74,24 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected function createAccount(){
+
+      return view('index')->with('page', 'register');
+		}
+    protected function createUser(Request $request){
+    $user = new User;
+    $user->name = $request['name'];
+    $user->email=$request['email'];
+    $user->password =Hash::make($request['password']);
+    $user->save();
+    return redirect('/login');
+  }
+  protected function loginUser(Request $request){
+
+    
+
+
+  }
+
 }
